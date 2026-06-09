@@ -15,6 +15,7 @@ const Navbar = () => {
 
     const [hireTimeout, setHireTimeout] = useState(null);
     const [joinTimeout, setJoinTimeout] = useState(null);
+    const [graduateTimeout, setGraduateTimeout] = useState(null);
 
     const closeMenus = () => {
         setMenuOpen(false);
@@ -195,11 +196,12 @@ const Navbar = () => {
                     {isHireDropdownOpen && (
                         <div className="nav-dropdown-menu">
                             <Link to="/companies" className="nav-dropdown-item" onClick={closeMenus}>
-                                Companies
+                                <div className="nav-dropdown-item__bar" />
+                                <span className="nav-dropdown-item__label">Companies</span>
                             </Link>
-
                             <Link to="/pricing" className="nav-dropdown-item" onClick={closeMenus}>
-                                Pricing
+                                <div className="nav-dropdown-item__bar" />
+                                <span className="nav-dropdown-item__label">Pricing</span>
                             </Link>
                         </div>
                     )}
@@ -245,57 +247,39 @@ const Navbar = () => {
                     {isDropdownOpen && (
                         <div className="nav-dropdown-menu">
                             <div
-                                className="nav-dropdown-item"
-                                style={{ position: "relative", cursor: "pointer" }}
+                                className="nav-dropdown-item nav-dropdown-item--teal"
+                                style={{ position: "relative" }}
                                 onMouseEnter={() => {
-                                    if (!isMobile) setIsGraduateDropdownOpen(true);
+                                    if (!isMobile) {
+                                        if (graduateTimeout) clearTimeout(graduateTimeout);
+                                        setIsGraduateDropdownOpen(true);
+                                    }
                                 }}
                                 onMouseLeave={() => {
-                                    if (!isMobile) setIsGraduateDropdownOpen(false);
+                                    if (!isMobile) {
+                                        const t = setTimeout(() => setIsGraduateDropdownOpen(false), 250);
+                                        setGraduateTimeout(t);
+                                    }
                                 }}
                                 aria-haspopup="true"
                                 aria-expanded={isGraduateDropdownOpen}
                             >
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "space-between",
-                                        gap: "0.5rem",
-                                    }}
+                                <div className="nav-dropdown-item__bar" />
+                                <Link
+                                    to="/graduates"
+                                    onClick={closeMenus}
+                                    style={{ flex: 1, color: "inherit", textDecoration: "none" }}
                                 >
-                                    <Link
-                                        to="/graduates"
-                                        onClick={closeMenus}
-                                        style={{
-                                            color: "inherit",
-                                            textDecoration: "none",
-                                            display: "block",
-                                            width: "100%",
-                                        }}
-                                    >
-                                        Graduates
-                                    </Link>
-
-                                    <button
-                                        type="button"
-                                        onClick={(event) => {
-                                            event.preventDefault();
-                                            event.stopPropagation();
-                                            setIsGraduateDropdownOpen(!isGraduateDropdownOpen);
-                                        }}
-                                        aria-label="Toggle graduates submenu"
-                                        style={{
-                                            background: "none",
-                                            border: "none",
-                                            color: "inherit",
-                                            cursor: "pointer",
-                                            fontSize: "1rem",
-                                        }}
-                                    >
-                                        ▸
-                                    </button>
-                                </div>
+                                    <span className="nav-dropdown-item__label">Graduates</span>
+                                </Link>
+                                <button
+                                    type="button"
+                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsGraduateDropdownOpen(!isGraduateDropdownOpen); }}
+                                    aria-label="Toggle graduates submenu"
+                                    style={{ background: "none", border: "none", color: "#9ca3af", cursor: "pointer", fontSize: "0.85rem", padding: 0 }}
+                                >
+                                    ▸
+                                </button>
 
                                 {isGraduateDropdownOpen && (
                                     <div
@@ -306,24 +290,25 @@ const Navbar = () => {
                                             top: isMobile ? "0" : "0",
                                             marginLeft: isMobile ? "1rem" : "0",
                                         }}
+                                        onMouseEnter={() => { if (graduateTimeout) clearTimeout(graduateTimeout); }}
+                                        onMouseLeave={() => {
+                                            if (!isMobile) {
+                                                const t = setTimeout(() => setIsGraduateDropdownOpen(false), 250);
+                                                setGraduateTimeout(t);
+                                            }
+                                        }}
                                     >
-                                        <Link
-                                            to="/apply"
-                                            className="nav-dropdown-item"
-                                            onClick={closeMenus}
-                                        >
-                                            Apply
+                                        <Link to="/apply" className="nav-dropdown-item nav-dropdown-item--teal" onClick={closeMenus}>
+                                            <div className="nav-dropdown-item__bar" />
+                                            <span className="nav-dropdown-item__label">Apply</span>
                                         </Link>
                                     </div>
                                 )}
                             </div>
 
-                            <Link
-                                to="/volunteer"
-                                className="nav-dropdown-item"
-                                onClick={closeMenus}
-                            >
-                                Volunteer
+                            <Link to="/volunteer" className="nav-dropdown-item nav-dropdown-item--teal" onClick={closeMenus}>
+                                <div className="nav-dropdown-item__bar" />
+                                <span className="nav-dropdown-item__label">Volunteer</span>
                             </Link>
                         </div>
                     )}
