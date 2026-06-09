@@ -48,13 +48,14 @@ function App() {
 
   return (
     <>
+      <a href="#main-content" className="skip-to-main">Skip to main content</a>
       <Helmet>
         {/* Base Meta Tags - overridden by individual pages */}
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#004da8" />
+        <meta name="theme-color" content="#4D3F9F" />
         
         {/* Base Open Graph Tags - overridden by individual pages */}
         <meta property="og:type" content="website" />

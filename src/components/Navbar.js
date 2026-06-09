@@ -45,11 +45,14 @@ const Navbar = () => {
     return (
         <nav
             className="navbar"
+            aria-label="Main navigation"
             style={{
                 display: "flex",
                 flexDirection: "column",
-                backgroundColor: "#004da8",
-                padding: "0.75rem 1rem",
+                backgroundColor: "white",
+                borderBottom: "1px solid var(--nwd-border)",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+                padding: "0.75rem 1.5rem",
                 position: "relative",
             }}
         >
@@ -76,14 +79,16 @@ const Navbar = () => {
                         href="https://nwd-central-hub-prototype.vercel.app"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onMouseOver={e => e.currentTarget.style.backgroundColor = "var(--nwd-purple-dark)"}
+                        onMouseOut={e => e.currentTarget.style.backgroundColor = "var(--nwd-purple)"}
                         style={{
-                            backgroundColor: "#ffd54a",
-                            color: "#004da8",
+                            backgroundColor: "var(--nwd-purple)",
+                            color: "white",
                             padding: "0.65rem 1.25rem",
                             borderRadius: "8px",
                             fontWeight: "700",
                             textDecoration: "none",
-                            transition: "0.2s ease",
+                            transition: "background-color 0.2s ease",
                             whiteSpace: "nowrap",
                         }}
                     >
@@ -99,7 +104,7 @@ const Navbar = () => {
                             fontSize: "2rem",
                             background: "none",
                             border: "none",
-                            color: "white",
+                            color: "var(--nwd-purple)",
                             cursor: "pointer",
                         }}
                     >
@@ -135,20 +140,16 @@ const Navbar = () => {
                     // HIGH Z-INDEX STACKING LAYER (z-50 equivalent)
                     zIndex: isMobile ? 50 : "auto",
 
-                    backgroundColor: isMobile ? "#004da8" : "transparent",
-                    padding: isMobile ? "1rem" : 0,
+                    backgroundColor: isMobile ? "white" : "transparent",
+                    border: isMobile ? "1px solid var(--nwd-border)" : "none",
+                    padding: isMobile ? "1rem 1rem 1.25rem" : 0,
                 }}
             >
                 <Item name="Contact" onClick={closeMenus} />
-                <WhiteSpacing />
                 <Item name="About" onClick={closeMenus} />
-                <WhiteSpacing />
                 <Item name="Developers" onClick={closeMenus} />
-                <WhiteSpacing />
                 <Item name="Portfolio" onClick={closeMenus} />
-                <WhiteSpacing />
                 <Item name="Services" onClick={closeMenus} />
-                <WhiteSpacing />
 
                 {/* Hire Us Dropdown */}
                 <div
@@ -169,21 +170,26 @@ const Navbar = () => {
                         }
                     }}
                 >
-          <span
+          <button
               className={`nav-dropdown-toggle ${
                   location.pathname === "/companies" ||
                   location.pathname === "/pricing"
                       ? "active-nav-link"
                       : ""
               }`}
+              aria-haspopup="true"
+              aria-expanded={isHireDropdownOpen}
               onClick={() => {
                   setIsHireDropdownOpen(!isHireDropdownOpen);
                   setIsDropdownOpen(false);
               }}
-              style={{ cursor: "pointer", color: "white" }}
+              onKeyDown={(e) => {
+                  if (e.key === "Escape") setIsHireDropdownOpen(false);
+              }}
+              style={{ cursor: "pointer", color: "var(--nwd-purple)" }}
           >
             Hire Us
-          </span>
+          </button>
 
                     {isHireDropdownOpen && (
                         <div className="nav-dropdown-menu">
@@ -197,8 +203,6 @@ const Navbar = () => {
                         </div>
                     )}
                 </div>
-
-                <WhiteSpacing />
 
                 {/* Join Us Dropdown */}
                 <div
@@ -219,18 +223,23 @@ const Navbar = () => {
                         }
                     }}
                 >
-          <span
+          <button
               className={`nav-dropdown-toggle ${
                   location.pathname === "/graduates" ? "active-nav-link" : ""
               }`}
+              aria-haspopup="true"
+              aria-expanded={isDropdownOpen}
               onClick={() => {
                   setIsDropdownOpen(!isDropdownOpen);
                   setIsHireDropdownOpen(false);
               }}
-              style={{ cursor: "pointer", color: "white" }}
+              onKeyDown={(e) => {
+                  if (e.key === "Escape") setIsDropdownOpen(false);
+              }}
+              style={{ cursor: "pointer", color: "var(--nwd-purple)" }}
           >
             Join Us
-          </span>
+          </button>
 
                     {isDropdownOpen && (
                         <div className="nav-dropdown-menu">
@@ -319,33 +328,28 @@ const Navbar = () => {
                     )}
                 </div>
 
-                <WhiteSpacing />
                 <Item name="Donate" onClick={closeMenus} />
 
                 {/* Mobile Sign In Button */}
                 {isMobile && (
-                    <>
-                        <WhiteSpacing />
-
-                        <a
-                            href="https://nwd-central-hub-prototype.vercel.app"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={closeMenus}
-                            style={{
-                                backgroundColor: "#ffd54a",
-                                color: "#004da8",
-                                padding: "0.75rem 1.25rem",
-                                borderRadius: "8px",
-                                fontWeight: "700",
-                                textDecoration: "none",
-                                display: "inline-block",
-                                marginTop: "0.5rem",
-                            }}
-                        >
-                            Sign In
-                        </a>
-                    </>
+                    <a
+                        href="https://nwd-central-hub-prototype.vercel.app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={closeMenus}
+                        style={{
+                            backgroundColor: "var(--nwd-purple)",
+                            color: "white",
+                            padding: "0.75rem 1.25rem",
+                            borderRadius: "8px",
+                            fontWeight: "700",
+                            textDecoration: "none",
+                            display: "inline-block",
+                            marginTop: "0.5rem",
+                        }}
+                    >
+                        Sign In
+                    </a>
                 )}
             </div>
         </nav>

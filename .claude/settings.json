@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(Select-String \"Variable\")",
+      "Bash(npm start *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(npx playwright *)",
+      "Read(//tmp/**)",
+      "Bash(find /tmp/playwright-test -name \"*.png\" 2>/dev/null && find \"C:/Users/Brad/AppData/Local/Temp\" -name \"ss-*.png\" 2>/dev/null | head -10)",
+      "Read(//c/Users/Brad/AppData/Local/Temp/**)",
+      "Bash(node screenshot2.mjs)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Get-Process -Id $_ -ErrorAction SilentlyContinue })",
+      "PowerShell(Stop-Process -Id 2336 -Force)"
+    ]
+  }
+}

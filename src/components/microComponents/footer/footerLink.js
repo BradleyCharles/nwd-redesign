@@ -13,11 +13,12 @@ export function FooterLink(props) {
   return (
     <Link
       style={{
-        color: isActive ? "#ffd700" : "white",
+        color: isActive ? "var(--nwd-teal)" : "#4a5568",
         textDecoration: isActive ? "underline" : "none",
-        fontWeight: isActive ? "600" : "200",
+        fontWeight: isActive ? "600" : "400",
       }}
       to={linkPath}
+      aria-current={isActive ? "page" : undefined}
     >
       {props.name}
     </Link>

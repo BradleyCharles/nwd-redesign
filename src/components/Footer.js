@@ -8,14 +8,16 @@ import CandidSeal from "./CandidSeal";
 const Footer = () => {
   
   return (
-    <div
+    <footer
+      aria-label="Site footer"
       style={{
         display: "flex",
         flexDirection: "row",
         width: "100%",
-        minHeight: "120px",
+        minHeight: "100px",
         gap: "3rem",
-        backgroundColor: "#004da8",
+        backgroundColor: "var(--nwd-surface)",
+        borderTop: "1px solid var(--nwd-border)",
         alignItems: "center",
         justifyContent: "center",
         flexWrap: "wrap",
@@ -36,7 +38,7 @@ const Footer = () => {
         }}
       >
         {/* Navigation */}
-        <ul style={footerList}>
+        <div>
           <h4 style={footerCategory}>Navigation</h4>
           <Separator />
           <ul
@@ -58,10 +60,10 @@ const Footer = () => {
             <li><FooterLink name="Donate" currentPath={location.pathname} /></li>
             
           </ul>
-        </ul>
+        </div>
 
         {/* Join Us */}
-        <ul style={footerList}>
+        <div>
           <h4 style={footerCategory}>Join Us</h4>
           <Separator />
           <ul
@@ -79,10 +81,10 @@ const Footer = () => {
             <li><FooterLink name="Volunteer" to="/volunteer" /></li>
             <li><FooterLink name="Apply" to="/apply" /></li>
           </ul>
-        </ul>
+        </div>
 
         {/* Hire Us */}
-        <ul style={footerList}>
+        <div>
           <h4 style={footerCategory}>Hire Us</h4>
           <Separator />
           <ul
@@ -99,7 +101,7 @@ const Footer = () => {
             <li><FooterLink name="Companies" to="/companies" currentPath={location.pathname} /></li>
             <li><FooterLink name="Pricing" to="/pricing" currentPath={location.pathname} /></li>
           </ul>
-        </ul>
+        </div>
       </div>
 
       {/* RIGHT SIDE */}
@@ -119,10 +121,12 @@ const Footer = () => {
           href="https://www.linkedin.com/company/next-wave-dev/"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Next Wave Dev on LinkedIn (opens in new tab)"
         >
           <img
             src={LINKEDIN_ICON}
-            alt="LinkedIn Icon"
+            alt=""
+            aria-hidden="true"
             style={{ width: "64px", height: "64px" }}
           />
         </a>
@@ -139,20 +143,24 @@ const Footer = () => {
           />
         </Link>
       </div>
-    </div>
+    </footer>
   );
 };
 
 const footerCategory = {
   fontWeight: 600,
   textAlign: "center",
-  color: "white",
+  color: "var(--nwd-purple)",
+  fontFamily: "'Geist Mono', monospace",
+  fontSize: "0.7rem",
+  letterSpacing: "0.1em",
+  textTransform: "uppercase",
 };
 
 const footerList = {
   listStyleType: "none",
-  fontWeight: 200,
-  color: "white",
+  fontWeight: 400,
+  color: "#4a5568",
   padding: 0,
   margin: 0,
 };

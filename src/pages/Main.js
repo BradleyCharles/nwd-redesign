@@ -52,6 +52,7 @@ function Main() {
         <meta name="robots" content="index, follow" />
       </Helmet>
       <Navbar />
+      <main id="main-content">
       <div className="homepage-content">
         <div className="hero__wrapper">
           <div className="hero">
@@ -162,11 +163,12 @@ function Main() {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           id={"contact-page-map"}
-          title="mainpagemap"
+          title="Map showing Next Wave Dev office location in Bellevue, Washington"
           className="contact-div__iframe"
         />
       </div>
       <Footer />
+      </main>
     </>
   );
 }

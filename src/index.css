@@ -1,3 +1,20 @@
+/* Geist fonts */
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('./fonts/GeistMono-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ==========
  Universal Rules
  ========== */
@@ -13,10 +30,19 @@ body {
 }
 
 :root {
-  --bg-color: white;
-  --primary-blue: rgb(0, 77, 168);
-  --primary-green: rgb(120, 190, 255);
-  --secondary-green: rgb(220, 240, 255);
+  /* Legacy aliases — redirect to new tokens so existing var() refs auto-update */
+  --bg-color:        #F7F7F5;
+  --primary-blue:    #4D3F9F;
+  --primary-green:   #3ECAE8;
+  --secondary-green: #EDEAF7;
+
+  /* NWD design-system tokens */
+  --nwd-purple:      #4D3F9F;
+  --nwd-purple-dark: #3A2E7A;
+  --nwd-teal:        #1E7A8C;
+  --nwd-sky:         #3ECAE8;
+  --nwd-surface:     #F7F7F5;
+  --nwd-border:      #E4E4E0;
 }
 
 * {
@@ -26,7 +52,50 @@ body {
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Geist', sans-serif;
+  background-color: var(--nwd-surface);
+  line-height: 1.5;
+}
+
+/* Skip navigation link — visually hidden until focused */
+.skip-to-main {
+  position: absolute;
+  top: -9999px;
+  left: 0;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--nwd-purple);
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0 0 8px 0;
+}
+.skip-to-main:focus {
+  top: 0;
+}
+
+/* Global focus indicators */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--nwd-teal);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ==========
@@ -39,7 +108,7 @@ navbar
 }
 
 .nav-dropdown-toggle {
-  color: white;
+  color: var(--nwd-purple);
   text-decoration: none;
   font-size: 1.3rem;
   font-weight: 600;
@@ -53,7 +122,7 @@ navbar
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #004da8;
+  background-color: var(--nwd-purple);
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1000;
@@ -72,7 +141,7 @@ navbar
 }
 
 .nav-dropdown-item:hover {
-  background-color: #003a7a;
+  background-color: var(--nwd-purple-dark);
 }
 
 @media (max-width: 800px) {
@@ -117,8 +186,8 @@ navbar
 .hero {
   height: 100%;
   background: linear-gradient(125deg,
-      var(--primary-blue) 50%,
-      rgba(0, 0, 0, 0) 60%,
+      var(--nwd-purple) 45%,
+      rgba(0, 0, 0, 0) 58%,
       rgba(0, 0, 0, 0) 100%);
 }
 
@@ -161,11 +230,11 @@ navbar
 /* ======= projects preview ======= */
 .portfolio-div {
   height: 70vh;
-  background-color: var(--bg-color);
+  background-color: var(--nwd-surface);
   background: linear-gradient(90deg,
       rgba(55, 55, 55, 0) 0%,
-      rgba(120, 190, 255, 0) 18%,
-      rgba(120, 190, 255, 1) 69%);
+      rgba(62, 202, 232, 0) 18%,
+      rgba(62, 202, 232, 0.45) 69%);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -184,6 +253,21 @@ navbar
   font-size: 3rem;
   font-weight: 700;
   width: 13ch;
+  position: relative;
+  padding-top: 1.4rem;
+  color: #111827;
+}
+
+.portfolio-div__flexcol__heading::before {
+  content: "PORTFOLIO";
+  font-size: 0.7rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--nwd-teal);
+  font-weight: 600;
+  font-family: 'Geist Mono', monospace;
+  letter-spacing: 0.12em;
 }
 
 .portfolio-div__flexcol__link {
@@ -253,7 +337,7 @@ navbar
   height: 55vh;
   background-image: url("images/Arts_and_Sciences.jpg");
   background-size: cover;
-  box-shadow: inset 0 0 0 1000px rgba(0, 77, 168, 0.85);
+  box-shadow: inset 0 0 0 1000px rgba(77, 63, 159, 0.82);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -337,11 +421,12 @@ navbar
 .donation-div {
   min-height: 40vh;
   padding: 4rem 2rem;
+  background-color: var(--nwd-surface);
   background: linear-gradient(
     90deg,
     rgba(55, 55, 55, 0) 0%,
-    rgba(120, 190, 255, 0) 18%,
-    rgba(120, 190, 255, 1) 69%
+    rgba(62, 202, 232, 0) 18%,
+    rgba(62, 202, 232, 0.45) 69%
   );
   display: flex;
   align-items: center;
@@ -358,6 +443,23 @@ navbar
   font-size: 3rem;
   font-weight: 700;
   width: auto;
+  position: relative;
+  padding-top: 1.4rem;
+  color: #111827;
+}
+
+.donation-div__flexcol__heading::before {
+  content: "SUPPORT";
+  font-size: 0.7rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--nwd-teal);
+  font-weight: 600;
+  font-family: 'Geist Mono', monospace;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
 }
 .donation-div__flexcol__paragraph {
   font-size: 1.5rem;
@@ -368,13 +470,12 @@ navbar
 }
 .donation-div__button {
   display: inline-block;
-  background-color: #3b82f3;
+  background-color: var(--nwd-purple);
   font-size: 1.5rem;
   font-weight: 600;
-  color: #ffff;
+  color: white;
   padding: 0.5rem;
   border-radius: 0.5rem;
-
 }
 @media (max-width: 800px) {
   .donation-div {
@@ -389,7 +490,7 @@ navbar
 
 /* ======= Graduates & Companies section ======= */
 .graduates-companies-section {
-  background-color: var(--secondary-green);
+  background-color: var(--nwd-surface);
   padding: 5rem 5vw;
   max-width: 2200px;
   margin: 0 auto;
@@ -399,7 +500,23 @@ navbar
   font-weight: 700;
   text-align: center;
   margin-bottom: 1rem;
-  color: var(--primary-blue);
+  color: #111827;
+  position: relative;
+  padding-top: 1.4rem;
+}
+
+.graduates-companies-section__title::before {
+  content: "FOR COMPANIES";
+  font-size: 0.7rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--nwd-teal);
+  font-weight: 600;
+  font-family: 'Geist Mono', monospace;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
 }
 .graduates-companies-section__text {
   max-width: 56rem;
@@ -407,7 +524,7 @@ navbar
   text-align: center;
   font-size: 1.15rem;
   line-height: 1.7;
-  color: #1f3d55;
+  color: #4a5568;
 }
 .graduates-companies-section__tiles {
   display: flex;
@@ -420,24 +537,23 @@ navbar
   flex: 1;
   max-width: 500px;
   background-color: white;
-  border-radius: 12px;
-  padding: 3rem 2rem;
+  border-top: 1px solid var(--nwd-border);
+  border-right: 1px solid var(--nwd-border);
+  border-bottom: 1px solid var(--nwd-border);
+  border-left: 4px solid var(--nwd-purple);
+  border-radius: 8px;
+  padding: 2.5rem 2rem;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: none;
+  transition: background-color 0.2s ease, border-left-color 0.2s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .graduates-companies-section__tile:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-  background-color: var(--primary-blue);
-}
-.graduates-companies-section__tile:hover .graduates-companies-section__tile-heading,
-.graduates-companies-section__tile:hover .graduates-companies-section__tile-description {
-  color: white;
+  background-color: color-mix(in srgb, var(--nwd-purple) 5%, white);
+  border-left-color: var(--nwd-purple-dark);
 }
 .graduates-companies-section__tile-content {
   display: flex;
@@ -447,14 +563,12 @@ navbar
 .graduates-companies-section__tile-heading {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--primary-blue);
-  transition: color 0.3s ease;
+  color: #111827;
 }
 .graduates-companies-section__tile-description {
   font-size: 1.1rem;
-  color: #333;
+  color: #4a5568;
   line-height: 1.6;
-  transition: color 0.3s ease;
 }
 @media (max-width: 800px) {
   .graduates-companies-section {
@@ -507,12 +621,14 @@ navbar
 }
 
 .contact-div__p-title::before {
-  content: "Join the Program";
-  font-size: 0.825rem;
+  content: "JOIN THE PROGRAM";
+  font-size: 0.7rem;
   position: absolute;
-  top: -1rem;
-  color: grey;
-  font-weight: 300;
+  top: -1.1rem;
+  color: var(--nwd-teal);
+  font-weight: 600;
+  font-family: 'Geist Mono', monospace;
+  letter-spacing: 0.12em;
 }
 
 @media (max-width: 920px) {
@@ -1089,7 +1205,8 @@ svg {
 
 /* Testimonials */
 .testimonials {
-  background-color: rgb(119, 172, 221);
+  background-color: #EDEAF7;
+  background-color: color-mix(in srgb, var(--nwd-purple) 8%, white);
   padding: 4rem 1rem;
 }
 
@@ -1159,7 +1276,7 @@ svg {
 }
 
 .notfound-button:hover {
-  background-color: #003a7a;
+  background-color: var(--nwd-purple-dark);
 }
 
 
@@ -1445,8 +1562,8 @@ h1, h2, h3 {
 
 /* Active navbar link */
 .active-nav-link {
-  color: #ffd54a !important;
+  color: var(--nwd-teal) !important;
   font-weight: 700 !important;
-  border-bottom: 3px solid #ffd54a;
+  border-bottom: 3px solid var(--nwd-teal);
   padding-bottom: 4px;
 }

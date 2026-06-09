@@ -2,7 +2,7 @@ export function Separator() {
   return (
     <div
       style={{
-        backgroundColor: "#1a70d8",
+        backgroundColor: "var(--nwd-border)",
         width: "auto",
         height: ".1rem",
         marginTop: ".2rem",

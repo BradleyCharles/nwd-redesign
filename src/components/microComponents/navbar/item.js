@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export function Item(props) {
   const style = {
-    color: "white",
+    color: "var(--nwd-purple)",
     textDecoration: "none",
     fontSize: "1.3rem",
     fontWeight: "600",
