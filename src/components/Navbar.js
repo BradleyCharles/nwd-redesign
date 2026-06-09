@@ -52,7 +52,8 @@ const Navbar = () => {
                 backgroundColor: "white",
                 borderBottom: "1px solid var(--nwd-border)",
                 boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
-                padding: "0.75rem 1.5rem",
+                paddingBlock: "0.75rem",
+                paddingInline: "max(1.5rem, calc((100vw - 1440px) / 2))",
                 position: "relative",
             }}
         >
@@ -171,7 +172,7 @@ const Navbar = () => {
                     }}
                 >
           <button
-              className={`nav-dropdown-toggle ${
+              className={`nav-dropdown-toggle nav-item ${
                   location.pathname === "/companies" ||
                   location.pathname === "/pricing"
                       ? "active-nav-link"
@@ -224,7 +225,7 @@ const Navbar = () => {
                     }}
                 >
           <button
-              className={`nav-dropdown-toggle ${
+              className={`nav-dropdown-toggle nav-item ${
                   location.pathname === "/graduates" ? "active-nav-link" : ""
               }`}
               aria-haspopup="true"

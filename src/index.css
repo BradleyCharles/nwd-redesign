@@ -120,35 +120,45 @@ navbar
 
 .nav-dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 0.5rem);
   left: 0;
-  background-color: var(--nwd-purple);
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  background: white;
+  border: 1px solid var(--nwd-border);
+  border-radius: 8px;
+  min-width: 180px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   z-index: 1000;
-  margin-top: 0.5rem;
-  border-radius: 4px;
+  padding: 0.25rem 0;
 }
 
+.nav-dropdown-item:first-child { border-radius: 7px 7px 0 0; }
+.nav-dropdown-item:last-child  { border-radius: 0 0 7px 7px; }
+
 .nav-dropdown-item {
-  color: white;
-  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  padding: 0.65rem 1rem 0.65rem 0.85rem;
+  border-left: 3px solid transparent;
+  color: #111827;
   text-decoration: none;
-  display: block;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
-  transition: background-color 0.2s;
+  transition: background-color 0.15s ease, border-left-color 0.15s ease, color 0.15s ease;
 }
 
 .nav-dropdown-item:hover {
-  background-color: var(--nwd-purple-dark);
+  background-color: color-mix(in srgb, var(--nwd-purple) 6%, white);
+  border-left-color: var(--nwd-purple);
+  color: var(--nwd-purple);
 }
 
 @media (max-width: 800px) {
   .nav-dropdown-menu {
     position: static;
     box-shadow: none;
-    margin-top: 0;
+    border: none;
+    border-radius: 0;
+    padding: 0;
     margin-left: 1rem;
   }
 
@@ -161,14 +171,9 @@ navbar
 /* ==========
  home
  ========== */
-.homepage-content,
-.portfolio-div,
-.developer-prev,
-.donation-div,
-.contact-div {
-  max-width: 2200px;
-  margin: 0 auto;
-}
+/* All section backgrounds are full-width.
+   Content is centered per-section via padding-inline.
+   Widths vary per section based on content density. */
 
 .homepage-content {
   display: flex;
@@ -177,7 +182,8 @@ navbar
 
 /* ======= hero ======= */
 .hero__wrapper {
-  height: 70vh;
+  height: 80vh;
+  min-height: 520px;
   background-image: url("images/NWD_AI_generated_photo.png");
   background-size: cover;
   background-position: center;
@@ -186,13 +192,16 @@ navbar
 .hero {
   height: 100%;
   background: linear-gradient(125deg,
-      var(--nwd-purple) 45%,
-      rgba(0, 0, 0, 0) 58%,
+      var(--nwd-purple) 52%,
+      rgba(0, 0, 0, 0) 66%,
       rgba(0, 0, 0, 0) 100%);
 }
 
 .hero__text {
-  padding-inline-start: 5vw;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  padding-inline: max(2rem, calc((100vw - 1440px) / 2));
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -205,15 +214,15 @@ navbar
   font-weight: 700;
   font-size: 4em;
   color: white;
-  width: 13ch;
+  max-width: 620px;
   text-shadow: 0 0 0.2em black;
 }
 
 .hero__text__subheading {
   font-weight: 400;
-  font-size: 2em;
+  font-size: 1.5em;
   color: white;
-  width: 23ch;
+  max-width: 580px;
   text-shadow: 0 0 0.2em black;
 }
 
@@ -239,6 +248,7 @@ navbar
   flex-direction: row;
   justify-content: space-between;
   gap: 1.5rem;
+  padding-inline: max(2rem, calc((100vw - 1440px) / 2));
 }
 
 .portfolio-div__flexcol {
@@ -246,7 +256,6 @@ navbar
   flex-direction: column;
   gap: 1.5rem;
   justify-content: center;
-  padding-inline-start: 5vw;
 }
 
 .portfolio-div__flexcol__heading {
@@ -282,7 +291,6 @@ navbar
   flex-direction: row;
   gap: 1.5rem;
   align-items: center;
-  padding-inline-end: 2.5vw;
 }
 
 .portfolio-div__examples_entry {
@@ -341,6 +349,7 @@ navbar
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-inline: max(2rem, calc((100vw - 1440px) / 2));
 }
 
 .developer-prev__gallery {
@@ -349,7 +358,6 @@ navbar
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-inline-start: 5vw;
   gap: 1rem;
 }
 
@@ -420,13 +428,14 @@ navbar
 /* ======= donation ======= */
 .donation-div {
   min-height: 40vh;
-  padding: 4rem 2rem;
+  padding-block: 4rem;
+  padding-inline: max(2rem, calc((100vw - 1440px) / 2));
   background-color: var(--nwd-surface);
   background: linear-gradient(
     90deg,
     rgba(55, 55, 55, 0) 0%,
-    rgba(62, 202, 232, 0) 18%,
-    rgba(62, 202, 232, 0.45) 69%
+    rgba(77, 63, 159, 0) 18%,
+    rgba(77, 63, 159, 0.18) 69%
   );
   display: flex;
   align-items: center;
@@ -438,6 +447,8 @@ navbar
   gap: 1.5rem;
   justify-content: center;
   text-align: center;
+  max-width: 720px;
+  width: 100%;
 }
 .donation-div__flexcol__heading {
   font-size: 3rem;
@@ -491,9 +502,8 @@ navbar
 /* ======= Graduates & Companies section ======= */
 .graduates-companies-section {
   background-color: var(--nwd-surface);
-  padding: 5rem 5vw;
-  max-width: 2200px;
-  margin: 0 auto;
+  padding-block: 5rem;
+  padding-inline: max(1.5rem, calc((100vw - 1300px) / 2));
 }
 .graduates-companies-section__title {
   font-size: 3rem;
@@ -535,7 +545,6 @@ navbar
 }
 .graduates-companies-section__tile {
   flex: 1;
-  max-width: 500px;
   background-color: white;
   border-top: 1px solid var(--nwd-border);
   border-right: 1px solid var(--nwd-border);
@@ -598,6 +607,7 @@ navbar
   display: flex;
   min-height: fit-content;
   padding-block: 5rem;
+  padding-inline: max(2rem, calc((100vw - 1300px) / 2));
   justify-content: space-around;
 }
 
@@ -751,7 +761,7 @@ navbar
 .developers-flexcolumn {
   min-width: 200px;
   width: 80vw;
-  max-width: 1900px;
+  max-width: 1200px;
   margin-inline: auto;
   padding-block-start: 1rem;
   display: flex;
@@ -922,7 +932,7 @@ svg {
   .content-wrapper,
   .page-content,
   .main-content {
-    max-width: 1400px;
+    max-width: 1440px;
     margin: 0 auto;
   }
 }
@@ -1099,7 +1109,7 @@ svg {
 
 .package-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
@@ -1207,7 +1217,8 @@ svg {
 .testimonials {
   background-color: #EDEAF7;
   background-color: color-mix(in srgb, var(--nwd-purple) 8%, white);
-  padding: 4rem 1rem;
+  padding-block: 4rem;
+  padding-inline: max(1.5rem, calc((100vw - 1100px) / 2));
 }
 
 .testimonials h2 {
@@ -1560,10 +1571,37 @@ h1, h2, h3 {
   }
 }
 
+/* Navbar link hover — teal underline slides in from left */
+.nav-item {
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.18s ease;
+}
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--nwd-teal);
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.18s ease;
+}
+.nav-item:hover {
+  color: var(--nwd-purple-dark) !important;
+}
+.nav-item:hover::after {
+  transform: scaleX(1);
+}
+
 /* Active navbar link */
 .active-nav-link {
   color: var(--nwd-teal) !important;
   font-weight: 700 !important;
-  border-bottom: 3px solid var(--nwd-teal);
-  padding-bottom: 4px;
+}
+.nav-item.active-nav-link::after {
+  transform: scaleX(1);
 }

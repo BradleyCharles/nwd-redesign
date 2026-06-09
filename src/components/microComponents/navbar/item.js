@@ -27,7 +27,7 @@ export function Item(props) {
     <NavLink
       to={"/" + props.name}
       className={({ isActive }) =>
-        isActive ? "active-nav-link" : ""
+        isActive ? "nav-item active-nav-link" : "nav-item"
       }
       style={style}
     >

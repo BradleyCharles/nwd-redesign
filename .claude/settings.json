@@ -11,7 +11,14 @@
       "Read(//c/Users/Brad/AppData/Local/Temp/**)",
       "Bash(node screenshot2.mjs)",
       "PowerShell(Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Get-Process -Id $_ -ErrorAction SilentlyContinue })",
-      "PowerShell(Stop-Process -Id 2336 -Force)"
+      "PowerShell(Stop-Process -Id 2336 -Force)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(Start-Sleep -Seconds 12)",
+      "Bash(Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 5)",
+      "Bash(Select-Object -ExpandProperty StatusCode)",
+      "Bash(netstat -ano)",
+      "Bash(node -e ' *)"
     ]
   }
 }

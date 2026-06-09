@@ -123,7 +123,6 @@ function Main() {
     
         </div> 
       </div>
-    <Section>  
       <div className="graduates-companies-section">
         <h2 className="graduates-companies-section__title">Hire Us</h2>
         <p className="graduates-companies-section__text">
@@ -148,8 +147,6 @@ function Main() {
           </Link>
         </div>
       </div>
-
-      </Section>
 
       <TestimonialsSection />
       <div className="contact-div">

@@ -21,7 +21,8 @@ const Footer = () => {
         alignItems: "center",
         justifyContent: "center",
         flexWrap: "wrap",
-        padding: "1rem 2rem",
+        paddingBlock: "1rem",
+        paddingInline: "max(2rem, calc((100vw - 1440px) / 2))",
         boxSizing: "border-box",
       }}
     >
